@@ -94,7 +94,7 @@
       //profile.active === true --> reason prop? --> return the string "confirm status manually"
       //  else --> deactivate & create profile reason prop
       if (profile.active === true) {
-        if (profile.reason || profile.reason !== undefined) {
+        if (profile.reason !== undefined) {
           return "confirm status manually";
         } else {
           profile.reason = reason;
@@ -117,23 +117,17 @@
         }
       }
 
-
-
-
-
-      // return profile
-
     }
 
     // 👉 CHALLENGE 2
-    function mineSweeper() {
+    function mineSweeper(grid, x, y) {
       // 🧠 mineSweeper takes a grid as its first argument, and coordinates x and y as the second and third args
       //  The grid is an array of arrays in the following format: [["🟥","🟦","🟥"],["🟦","🟥","🟥"],["🟥","🟦","🟦"]]
       //  Each subarray is a row of the grid, the first subarray being the top row:
-      //  [
-      //    ["🟥", "🟦", "🟥"],
-      //    ["🟦", "🟥", "🟥"],
-      //    ["🟥", "🟦", "🟦"]
+      //  [   x:    1     2     3
+      //    y: 1  ["🟥", "🟦", "🟥"],
+      //       2  ["🟦", "🟥", "🟥"],
+      //       3  ["🟥", "🟦", "🟦"]
       //  ]
       // The subarrays can contain any mix of red and blue squares
       // The coordinates x and y are numbers: either 1 or 2 or 3
@@ -145,7 +139,20 @@
       //    * If the player lands on blue, return the string "🟦 🥳"
       // 🧠 Edge cases:
       //    * If the x or y coordinates are under 1 or over 3, return the string "invalid coordinates"
+
+      if ((x < 1 || x > 3) || (y < 1 || y > 3)) {
+        return "invalid coordinates"
+      };
+      // console.log(grid[y-1][x-1]);
+      if (grid[y - 1][x - 1] === "🟦") {
+        return "🟦 🥳"
+      }
+      if (grid[y - 1][x - 1] === "🟥") {
+        return "🟥 💀"
+      }
     }
+
+
 
     // 👉 CHALLENGE 3
     function booleanize() {
