@@ -220,7 +220,7 @@
     }
 
     // 👉 CHALLENGE 5
-    function normalizePhoneNumber() {
+    function normalizePhoneNumber(str) {
       // 🧠 normalizePhoneNumber takes a string as its only argument, representing a ten-digit number
       // The function returns a string formatted as seen below
       // 🧠 Examples of usage:
@@ -232,6 +232,38 @@
       // 🌟 HINT: instead of looping over the number's digits, loop backwards over a template "(XXX) XXX-XXXX"
       // 🌟 HINT: at each iteration, if the current character is an "X", replace it with the result of popping a digit from the number
       // 🌟 HINT: if you'd rather loop forwards, use `shift` instead of `pop`
+
+      if (str.length !== 10) {
+        return "type a 10-digit number";
+      };
+
+      let template = "(XXX) XXX-XXXX";
+      let digitArr = str.split("");
+
+      //regular expression explaination:
+      // ^ (caret): This means "start of the line". It tells the regex that what we're looking for should be at the very beginning of the string.
+
+      //       \d: This is a special code in regex.It means any digit(number from 0 to 9).
+
+      // +: This means "one or more".So, \d + means one or more digits in a row.
+
+      //         $(dollar sign): This means "end of the line".It tells the regex that what we're looking for should be at the very end of the string.
+
+      // Putting it all together:
+
+      //       /^\d+$/ is looking for a string that starts and ends with one or more digits.In simple terms, it's checking if the entire string is made up of numbers and nothing else.
+
+      const regex = /^\d+$/;
+      if (!regex.test(str)) {
+        return "invalid phone number";
+      }
+
+      for (let i = template.length - 1; i >= 0; i--) {
+        if (template[i] === "X") {
+          template = template.slice(0, i) + digitArr.pop() + template.slice(i + 1);
+        };
+      }
+      return template;
     }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
