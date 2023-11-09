@@ -166,7 +166,6 @@
       // 🌟 HINT: careful not to perform any unintended changes on the object
 
       for (const key in obj) {
-
         if (key.length > 9) {
           return "shorten all prop names to 9 chars or less"
         }
@@ -199,6 +198,25 @@
       //    scrub("aces high", ["high", "aces", "hearts"]) // returns "xxxx xxxx"
       //    scrub("", ["high", "aces""]) // returns ""
       // 🌟 HINT: useful array methods to use are `push`, `indexOf`, `split`, `join`
+      // split str into word array --> compare each str word to each word in forbArr
+
+      //corner cases: empty str or empty forbArr
+      if (str === "" || forbArr.length === 0) {
+        return str;
+      };
+
+      // array to hold str words
+      let strWords = str.split(" ");
+
+      // for each word in string check if it matches word in 
+      for (sWord in strWords) {
+        for (fWord in forbArr) {
+          if (strWords[sWord] === forbArr[fWord]) {
+            strWords[sWord] = "x".repeat(strWords[sWord].length);
+          }
+        }
+      }
+      return strWords.join(" ");
     }
 
     // 👉 CHALLENGE 5
